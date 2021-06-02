@@ -57,6 +57,7 @@ open class TLAssetPreviewViewController: UIViewController {
 }
 
 private extension TLAssetPreviewViewController {
+    
     func setupViews() {
         view.backgroundColor = .previewBackground
         view.addAligned(imageView)

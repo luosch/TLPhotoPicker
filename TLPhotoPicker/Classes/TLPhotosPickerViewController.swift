@@ -52,6 +52,8 @@ extension TLPhotosPickerLogDelegate {
 }
 
 public struct TLPhotosPickerConfigure {
+    public var prefersStatusBarHidden = false
+    public var preferredStatusBarStyle = UIStatusBarStyle.default
     public var customLocalizedTitle: [String: String] = ["Camera Roll": "Camera Roll"]
     public var tapHereToChange = "Tap here to change"
     public var cancelTitle = "Cancel"
@@ -202,6 +204,14 @@ open class TLPhotosPickerViewController: UIViewController {
     deinit {
         //print("deinit TLPhotosPickerViewController")
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
+    }
+    
+    open override var prefersStatusBarHidden: Bool {
+        return configure.prefersStatusBarHidden
+    }
+    
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return configure.preferredStatusBarStyle
     }
     
     required public init?(coder aDecoder: NSCoder) {
