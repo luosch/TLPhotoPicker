@@ -253,22 +253,48 @@ extension TLPhotoLibrary {
                         self?.delegate?.loadCameraRollCollection(collection: cameraRoll)
                     }
                 }
-                //Screenshots
-                getSmartAlbum(subType: .smartAlbumScreenshots, result: &assetCollections)
-                //Selfies
-                getSmartAlbum(subType: .smartAlbumSelfPortraits, result: &assetCollections)
-                //Panoramas
-                getSmartAlbum(subType: .smartAlbumPanoramas, result: &assetCollections)
+                
                 //Favorites
                 getSmartAlbum(subType: .smartAlbumFavorites, result: &assetCollections)
-                //CloudShared
-                getSmartAlbum(subType: .albumCloudShared, result: &assetCollections)
-                //get all another albums
-                getAlbum(subType: .any, result: &assetCollections)
+                
                 if configure.allowedVideo {
                     //Videos
                     getSmartAlbum(subType: .smartAlbumVideos, result: &assetCollections)
                 }
+                
+                //Selfies
+                getSmartAlbum(subType: .smartAlbumSelfPortraits, result: &assetCollections)
+                
+                // LivePhotos
+                if #available(iOS 10.3, *) {
+                    getSmartAlbum(subType: .smartAlbumLivePhotos, result: &assetCollections)
+                }
+                
+                // DepthEffect
+                if #available(iOS 10.2, *) {
+                    getSmartAlbum(subType: .smartAlbumDepthEffect, result: &assetCollections)
+                }
+                
+                //Panoramas
+                getSmartAlbum(subType: .smartAlbumPanoramas, result: &assetCollections)
+                
+                // Slomo
+                getSmartAlbum(subType: .smartAlbumSlomoVideos, result: &assetCollections)
+                
+                //Screenshots
+                getSmartAlbum(subType: .smartAlbumScreenshots, result: &assetCollections)
+                
+                // Animated
+                if #available(iOS 11, *) {
+                    getSmartAlbum(subType: .smartAlbumAnimated, result: &assetCollections)
+                }
+                
+                //CloudShared
+                getSmartAlbum(subType: .albumCloudShared, result: &assetCollections)
+                
+                //get all another albums
+                getAlbum(subType: .any, result: &assetCollections)
+                
                 //Album
                 let collectionOption = fetchCollectionOption[.topLevelUserCollections]
                 let albumsResult = PHCollectionList.fetchTopLevelUserCollections(with: collectionOption)
